@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.multibank.jvm.library)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 dependencies{

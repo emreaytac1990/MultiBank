@@ -27,3 +27,4 @@ rootProject.name = "MultiBank"
 include(":app")
 include(":core:navigation")
 include(":feature:stock")
+include(":core:websocket")
