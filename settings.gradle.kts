@@ -1,5 +1,5 @@
 pluginManagement {
-    // includeBuild("build-logic")
+    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -25,4 +25,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "MultiBank"
 include(":app")
-include(":build-logic:convention")
