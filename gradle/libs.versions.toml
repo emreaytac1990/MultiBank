@@ -19,6 +19,7 @@ coroutines = "1.10.2"
 hilt = "2.59.1"
 hiltExt = "1.2.0"
 hilt_navigation_compose = "1.2.0"
+javaxInject = "1"
 kotlin = "2.2.21"
 kotlinxCollectionsImmutable = "0.4.0"
 kotlinxSerializationJson = "1.8.0"
@@ -56,6 +57,7 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+javax-inject = { module = "javax.inject:javax.inject", version.ref = "javaxInject" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 kotlin-metadata = { module = "org.jetbrains.kotlin:kotlin-metadata-jvm", version.ref = "kotlin" }
 kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinxCollectionsImmutable" }
