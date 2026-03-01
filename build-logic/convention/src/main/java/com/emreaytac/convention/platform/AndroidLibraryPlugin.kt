@@ -42,6 +42,8 @@ class AndroidLibraryPlugin: Plugin<Project> {
                 androidTestImplementation("kotlin.test", libs)
                 testImplementation("kotlin.test", libs)
                 testImplementation("junit", libs)
+                implementation("androidx-core-ktx", target.libs)
+                implementation("kotlinx-serialization-json", target.libs)
             }
         }
     }
