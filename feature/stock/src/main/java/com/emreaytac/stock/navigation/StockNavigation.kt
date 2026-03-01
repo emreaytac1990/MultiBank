@@ -1,5 +1,6 @@
 package com.emreaytac.stock.navigation
 
+import androidx.compose.material3.Text
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -16,9 +17,10 @@ fun NavGraphBuilder.stockGraph(navController: NavController) {
 
 
         composable<StockList> {
-            StockListScreen(onItemClick = { id ->
+            /*StockListScreen(onItemClick = { id ->
                 navController.navigate(StockDetail(itemId = id))
-            })
+            })*/
+            Text("List")
         }
 
 
@@ -28,10 +30,11 @@ fun NavGraphBuilder.stockGraph(navController: NavController) {
             )
         ) { backStackEntry ->
             val detail: StockDetail = backStackEntry.toRoute()
-            StockDetailScreen(
+            /*StockDetailScreen(
                 itemId = detail.itemId,
                 onBack = { navController.popBackStack() }
-            )
+            )*/
+            Text("Detail")
         }
     }
 }
