@@ -6,6 +6,7 @@ import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
 import com.emreaytac.datastore.UserPreferences
 import com.emreaytac.datastore.UserPreferencesSerializer
+import com.emreaytac.di.ApplicationScope
 import com.emreaytac.di.Dispatchers
 import dagger.Module
 import dagger.Provides
@@ -18,34 +19,22 @@ import kotlinx.coroutines.SupervisorJob
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
-@Retention(AnnotationRetention.RUNTIME)
-@Qualifier
-annotation class ApplicationScope
 
 
 @Module
 @InstallIn(SingletonComponent::class)
 object DataStoreModule {
 
-    @Provides
-    @Dispatchers.Main
-    fun provideDispatcherMain() = kotlinx.coroutines.Dispatchers.Main
-
-    @Provides
-    @Dispatchers.IO
-    fun provideDispatcherIO() = kotlinx.coroutines.Dispatchers.IO
-
-    @Provides
-    @Dispatchers.Default
-    fun provideDispatcherDefault() = kotlinx.coroutines.Dispatchers.Default
-
-    @Provides
-    @Singleton
-    @ApplicationScope
-    fun providesCoroutineScope(
-        @Dispatchers.Default dispatcher: CoroutineDispatcher,
-    ): CoroutineScope = CoroutineScope(SupervisorJob() + dispatcher)
-
+    @Module
+    @InstallIn(SingletonComponent::class)
+    internal object CoroutineScopesModule {
+        @Provides
+        @Singleton
+        @ApplicationScope
+        fun providesCoroutineScope(
+            @Dispatchers.Default dispatcher: CoroutineDispatcher,
+        ): CoroutineScope = CoroutineScope(SupervisorJob() + dispatcher)
+    }
 
     @Provides
     @Singleton

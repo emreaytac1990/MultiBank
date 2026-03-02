@@ -20,3 +20,7 @@ interface Dispatchers {
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class BaseUrl
+
+@Retention(AnnotationRetention.RUNTIME)
+@Qualifier
+annotation class ApplicationScope
