@@ -22,7 +22,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import javax.inject.Singleton
 import kotlinx.serialization.json.Json
 import java.math.BigDecimal
 
@@ -53,7 +52,7 @@ class StockRepositoryImpl @Inject constructor(private val socketManager: SocketM
                     updateStockPrices(stockList)
 
                 } catch (e: Exception) {
-                    Log.e("StockRepository - listenws", "Error parsing message: ${e.message}")
+                    Log.e("StockRepository - listen-ws", "message: ${e.message}")
                 }
             }
         }

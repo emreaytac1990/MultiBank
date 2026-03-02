@@ -46,33 +46,33 @@ internal fun generateMockList(): List<StockPriceResponse> {
 }
 
 private fun generateMockPriceResponse(symbol: String): StockPriceResponse {
-    val basePrice = when (symbol) {
-        "AAPL" -> BigDecimal("264.18")
-        "GOOG" -> BigDecimal("311.43")
-        "TSLA" -> BigDecimal("402.51")
-        "AMZN" -> BigDecimal("215.10")
-        "MSFT" -> BigDecimal("490.45")
-        "NVDA" -> BigDecimal("145.20")
-        "META" -> BigDecimal("585.30")
-        "NFLX" -> BigDecimal("820.15")
-        "AMD" -> BigDecimal("165.40")
-        "INTC" -> BigDecimal("24.80")
-        "IBM" -> BigDecimal("235.60")
-        "ORCL" -> BigDecimal("175.25")
-        "CSCO" -> BigDecimal("52.10")
-        "ADBE" -> BigDecimal("540.80")
-        "CRM" -> BigDecimal("295.50")
-        "PYPL" -> BigDecimal("82.40")
-        "UBER" -> BigDecimal("78.90")
-        "LYFT" -> BigDecimal("16.30")
-        "SNAP" -> BigDecimal("12.15")
-        "SPOT" -> BigDecimal("420.75")
-        "SHOP" -> BigDecimal("95.20")
-        "SQ" -> BigDecimal("88.40")
-        "DOCU" -> BigDecimal("65.10")
-        "ZM" -> BigDecimal("72.30")
-        "ROKU" -> BigDecimal("68.90")
-        else -> BigDecimal("100.00")
+    val (symbolName, baseID, basePrice) = when (symbol) {
+        "AAPL" -> Triple("Apple Inc.", "32134", BigDecimal("264.18"))
+        "GOOG" -> Triple("Alphabet Inc.", "32135", BigDecimal("311.43"))
+        "TSLA" -> Triple("Tesla, Inc.", "32136", BigDecimal("402.51"))
+        "AMZN" -> Triple("Amazon.com, Inc.", "32137", BigDecimal("215.10"))
+        "MSFT" -> Triple("Microsoft Corp.", "32138", BigDecimal("490.45"))
+        "NVDA" -> Triple("NVIDIA Corp.", "32139", BigDecimal("145.20"))
+        "META" -> Triple("Meta Platforms", "32140", BigDecimal("585.30"))
+        "NFLX" -> Triple("Netflix, Inc.", "32141", BigDecimal("820.15"))
+        "AMD"  -> Triple("Advanced Micro Devices", "32142", BigDecimal("165.40"))
+        "INTC" -> Triple("Intel Corp.", "32143", BigDecimal("24.80"))
+        "IBM"  -> Triple("IBM Corp.", "32144", BigDecimal("235.60"))
+        "ORCL" -> Triple("Oracle Corp.", "32145", BigDecimal("175.25"))
+        "CSCO" -> Triple("Cisco Systems", "32146", BigDecimal("52.10"))
+        "ADBE" -> Triple("Adobe Inc.", "32147", BigDecimal("540.80"))
+        "CRM"  -> Triple("Salesforce, Inc.", "32148", BigDecimal("295.50"))
+        "PYPL" -> Triple("PayPal Holdings", "32149", BigDecimal("82.40"))
+        "UBER" -> Triple("Uber Technologies", "32150", BigDecimal("78.90"))
+        "LYFT" -> Triple("Lyft, Inc.", "32151", BigDecimal("16.30"))
+        "SNAP" -> Triple("Snap Inc.", "32152", BigDecimal("12.15"))
+        "SPOT" -> Triple("Spotify Technology", "32153", BigDecimal("420.75"))
+        "SHOP" -> Triple("Shopify Inc.", "32154", BigDecimal("95.20"))
+        "SQ"   -> Triple("Block, Inc.", "32155", BigDecimal("88.40"))
+        "DOCU" -> Triple("DocuSign, Inc.", "32156", BigDecimal("65.10"))
+        "ZM"   -> Triple("Zoom Video", "32157", BigDecimal("72.30"))
+        "ROKU" -> Triple("Roku, Inc.", "32158", BigDecimal("68.90"))
+        else   -> Triple("Unknown Stock", "00000", BigDecimal("100.00"))
     }
 
     val randomValue = Random.nextDouble(-5.0, 5.0).toString()
@@ -80,8 +80,9 @@ private fun generateMockPriceResponse(symbol: String): StockPriceResponse {
     val price = (basePrice + randomChange).setScale(2, RoundingMode.HALF_UP)
 
     return StockPriceResponse(
+        id = baseID,
         symbol = symbol,
-        symbolName = symbol,
+        symbolName = symbolName,
         symbolDescription = getDescriptionForSymbol(symbol),
         price = price,
         timestamp = System.currentTimeMillis()

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_stock_live">LIVE</string>
+    <string name="feature_stock_offline">OFFLINE</string>
+    <string name="feature_stock_stop_feed">STOP FEED</string>
+    <string name="feature_stock_start_feed">START FEED</string>
+    <string name="feature_stock_markets">Markets</string>
+</resources>

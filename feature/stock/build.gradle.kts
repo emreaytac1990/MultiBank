@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.multibank.android.library)
-    //alias(libs.plugins.multibank.android.feature)
     alias(libs.plugins.multibank.android.library.compose)
     alias(libs.plugins.multibank.hilt)
 }
@@ -19,6 +18,7 @@ dependencies {
 
     implementation(project(":core:navigation"))
     implementation(project(":core:data"))
+    implementation(project(":core:designsystem"))
 
     implementation(libs.androidx.hilt.lifecycle.viewModelCompose)
 }

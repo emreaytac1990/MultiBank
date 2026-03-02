@@ -10,6 +10,7 @@ import java.math.RoundingMode
 
 @Serializable
 data class StockPriceResponse(
+    @SerialName("id") val id: String,
     @SerialName("symbol") val symbol: String,
 
     @SerialName("symbolName") val symbolName: String,
@@ -30,13 +31,17 @@ fun StockPriceResponse.toDomain(previousPrice: BigDecimal?): StockPrice {
         else -> PriceDirection.SAME
     }
 
-    val percentageChange = previousPrice?.let {
-        if (it == BigDecimal.ZERO) return@let BigDecimal.ZERO
+    val percentageChange = previousPrice?.let { prev ->
+        if (prev == BigDecimal.ZERO) return@let BigDecimal.ZERO
 
-        ((price - it) / it * BigDecimal(100)).setScale(2, RoundingMode.HALF_UP)
+        (price - prev)
+            .divide(prev, 4, RoundingMode.HALF_UP)
+            .multiply(BigDecimal(100))
+            .setScale(2, RoundingMode.HALF_UP)
     } ?: BigDecimal.ZERO
 
     return StockPrice(
+        id = id,
         symbol = symbol,
         symbolName = symbolName,
         symbolDescription = symbolDescription,

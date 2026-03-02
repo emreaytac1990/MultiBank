@@ -33,20 +33,62 @@ internal val infoLinkDark         = Color(0xFF4F8EF7)
 internal val goldLight             = Color(0xFFFFB830)
 internal val goldDark              = Color(0xFFFFCB5B)
 
+internal val cardLight            = Color(0xFF0F172A)
+internal val cardDark             = Color(0xFFF0F2F7)
+
+internal val cardBorderLight      = Color(0x0F000000)
+internal val cardBorderDark       = Color(0x12FFFFFF)
+
+internal val topBoxBorderPositiveLight      = Color(0x40059669)
+internal val topBoxBorderPositiveDark       = Color(0x40059669)
+
+internal val topBoxBorderNegativeLight      = Color(0xFFF6B9BA)
+internal val topBoxBorderNegativeDark       = Color(0xFFF6B9BA)
+
+internal val topBoxBgPositiveLight      = Color(0xFFE5F2F0)
+internal val topBoxBgPositiveDark       = Color(0xFFE5F2F0)
+
+internal val topBoxBgNegativeLight      = Color(0xFFF8EBED)
+internal val topBoxBgNegativeDark       = Color(0xFFF8EBED)
+
+
+
+
+
 
 data class MBExtendedColors(
     val gold: Color,
     val goldGlow: Color,
+    val cardMainText: Color,
+    val cardBorder: Color,
+    val topBoxBorderPositive: Color,
+    val topBoxBorderNegative: Color,
+    val topBoxBgPositive: Color,
+    val topBoxBgNegative: Color
 )
+
+
 
 val LightExtendedColors = MBExtendedColors(
     gold                    = goldLight,
-    goldGlow                = goldLight.copy(alpha = 0.5f)
+    goldGlow                = goldLight.copy(alpha = 0.5f),
+    cardMainText            = cardLight,
+    cardBorder              = cardBorderLight,
+    topBoxBorderPositive    = topBoxBorderPositiveLight,
+    topBoxBorderNegative    = topBoxBorderNegativeLight,
+    topBoxBgPositive        = topBoxBgPositiveLight,
+    topBoxBgNegative        = topBoxBgNegativeLight
 )
 
 val DarkExtendedColors = MBExtendedColors(
     gold                    = goldDark,
-    goldGlow                = goldDark.copy(alpha = 0.4f)
+    goldGlow                = goldDark.copy(alpha = 0.4f),
+    cardMainText            = cardDark,
+    cardBorder              = cardBorderDark,
+    topBoxBorderPositive    = topBoxBorderPositiveDark,
+    topBoxBorderNegative    = topBoxBorderNegativeDark,
+    topBoxBgPositive        = topBoxBgPositiveDark,
+    topBoxBgNegative        = topBoxBgNegativeDark
 )
 
 val LocalExtendedColors = staticCompositionLocalOf { LightExtendedColors }

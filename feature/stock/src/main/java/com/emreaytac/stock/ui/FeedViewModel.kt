@@ -5,40 +5,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.emreaytac.domain.repository.StockRepository
 import com.emreaytac.domain.repository.UserDataRepository
-import com.emreaytac.model.DarkThemeConfig
 import com.emreaytac.model.StockPrice
 import com.emreaytac.websocket.SocketStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.time.Duration.Companion.seconds
 
 @HiltViewModel
 class FeedViewModel @Inject constructor(
     private val stockRepository: StockRepository,
     userDataRepository: UserDataRepository
 ): ViewModel(){
-
-    val settingsUiState: StateFlow<mState> =
-        userDataRepository.userData
-            .map { userData ->
-                mState(userData.darkThemeConfig)
-            }
-            .stateIn(
-                scope = viewModelScope,
-                started = WhileSubscribed(5.seconds.inWholeMilliseconds),
-                initialValue = mState(DarkThemeConfig.DARK),
-            )
-    data class mState(
-        val adasd : DarkThemeConfig
-    )
 
     private val _uiState = MutableStateFlow(FeedUiState())
     val uiState: StateFlow<FeedUiState> = _uiState.asStateFlow()
@@ -59,7 +40,8 @@ class FeedViewModel @Inject constructor(
                     Log.e("FeedViewModel", "prices: ${prices.first().symbol} ")
                     _uiState.update { it.copy(
                         stockPrices = prices,
-                        isLoading = false
+                        isLoading = false,
+                        isFeedActive = true
                     )}
                 }
             }

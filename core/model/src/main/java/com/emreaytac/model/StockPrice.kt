@@ -6,6 +6,7 @@ enum class PriceDirection { UP, DOWN, SAME }
 
 
 data class StockPrice(
+    val id: String,
     val symbol: String,
     val symbolName: String,
     val symbolDescription: String,
