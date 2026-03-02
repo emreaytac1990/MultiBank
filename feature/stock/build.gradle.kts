@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.multibank.android.library)
+    //alias(libs.plugins.multibank.android.feature)
     alias(libs.plugins.multibank.android.library.compose)
+    alias(libs.plugins.multibank.hilt)
 }
 
 android {
@@ -16,4 +18,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(project(":core:navigation"))
+    implementation(project(":core:data"))
+
+    implementation(libs.androidx.hilt.lifecycle.viewModelCompose)
 }

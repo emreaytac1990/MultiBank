@@ -28,7 +28,7 @@ android {
 dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation(project(":core:websocket"))
+    api(project(":core:websocket"))
     implementation(project(":core:di"))
     api(project(":core:domain"))
     api(project(":core:datastore"))

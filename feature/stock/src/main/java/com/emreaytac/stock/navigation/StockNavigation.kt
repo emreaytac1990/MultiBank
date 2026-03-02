@@ -10,6 +10,7 @@ import androidx.navigation.navigation
 import com.emreaytac.navigation.StockDetail
 import com.emreaytac.navigation.StockGraph
 import com.emreaytac.navigation.StockList
+import com.emreaytac.stock.ui.FeedScreen
 
 fun NavGraphBuilder.stockGraph(navController: NavController) {
 
@@ -20,7 +21,8 @@ fun NavGraphBuilder.stockGraph(navController: NavController) {
             /*StockListScreen(onItemClick = { id ->
                 navController.navigate(StockDetail(itemId = id))
             })*/
-            Text("List")
+            //Text("List")
+            FeedScreen(onStockClick = {})
         }
 
 

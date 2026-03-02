@@ -24,13 +24,15 @@ data class StockPriceResponse(
 
 fun StockPriceResponse.toDomain(previousPrice: BigDecimal?): StockPrice {
     val direction = when {
-        previousPrice == null -> PriceDirection.SAME
+        previousPrice == null || previousPrice == BigDecimal.ZERO -> PriceDirection.SAME
         price > previousPrice -> PriceDirection.UP
         price < previousPrice -> PriceDirection.DOWN
         else -> PriceDirection.SAME
     }
 
     val percentageChange = previousPrice?.let {
+        if (it == BigDecimal.ZERO) return@let BigDecimal.ZERO
+
         ((price - it) / it * BigDecimal(100)).setScale(2, RoundingMode.HALF_UP)
     } ?: BigDecimal.ZERO
 

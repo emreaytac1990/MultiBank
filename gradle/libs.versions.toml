@@ -12,6 +12,8 @@ constraintlayout = "2.2.1"
 jetbrainsKotlinJvm = "2.2.10"
 
 activityCompose = "1.12.1"
+androidxHiltLifecycleViewModelCompose = "1.3.0"
+androidxLifecycle = "2.10.0"
 androidxComposeMaterial3Adaptive = "1.1.0-rc01"
 androidxComposeMaterial3AdaptiveNavigation3 = "1.3.0-alpha04"
 androidxCoreSplashscreen = "1.2.0"
@@ -19,16 +21,15 @@ androidxDataStore = "1.2.0"
 composeBom = "2025.09.01"
 composeNav = "2.9.2"
 coroutines = "1.10.2"
-hilt = "2.59.1"
-hiltExt = "1.2.0"
-hilt_navigation_compose = "1.2.0"
+hilt = "2.59.2"
+hiltExt = "1.3.0"
+hilt_navigation_compose = "1.3.0"
 javaxInject = "1"
 kotlin = "2.2.21"
 kotlinxCollectionsImmutable = "0.4.0"
 kotlinxSerializationJson = "1.10.0"
 ksp = "2.3.4"
 ktor = "3.3.2"
-lifecycleRuntimeKtx = "2.10.0"
 navigationCompose = "2.9.7"
 protobuf = "4.29.2"
 protobufPlugin = "0.9.6"
@@ -61,7 +62,13 @@ androidx-compose-material3-windowSizeClass = { group = "androidx.compose.materia
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidxCoreSplashscreen" }
 androidx-dataStore = { group = "androidx.datastore", name = "datastore", version.ref = "androidxDataStore" }
-androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+
+androidx-hilt-lifecycle-viewModelCompose = { group = "androidx.hilt", name = "hilt-lifecycle-viewmodel-compose", version.ref = "androidxHiltLifecycleViewModelCompose" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
+androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+androidx-lifecycle-runtimeTesting = { group = "androidx.lifecycle", name = "lifecycle-runtime-testing", version.ref = "androidxLifecycle" }
+androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
+
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -116,5 +123,6 @@ multibank-android-application = { id = "multibank.android.application" }
 multibank-android-application-compose = { id = "multibank.android.application.compose" }
 multibank-android-library-compose = { id = "multibank.android.library.compose" }
 multibank-android-library = { id = "multibank.android.library" }
+multibank-android-feature = { id = "multibank.android.feature" }
 multibank-jvm-library = { id = "multibank.jvm.library" }
 multibank-hilt = { id = "multibank.hilt" }

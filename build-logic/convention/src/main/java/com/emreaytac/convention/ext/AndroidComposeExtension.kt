@@ -28,7 +28,7 @@ internal fun Project.configureAndroidCompose(
         implementation("androidx-compose-ui-tooling-preview", libs)
         implementation("androidx-compose-material3", libs)
         implementation("androidx-compose-navigation", libs)
-        implementation("androidx-compose-navigation-hilt", libs)
+        //implementation("androidx-compose-navigation-hilt", libs)
         implementation("kotlinx-collections-immutable", libs)
         add("implementation", "androidx.compose.material:material-icons-core:1.7.8")
         debugImplementation("androidx-compose-ui-tooling", libs)

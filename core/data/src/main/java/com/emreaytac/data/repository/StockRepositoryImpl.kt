@@ -26,7 +26,6 @@ import javax.inject.Singleton
 import kotlinx.serialization.json.Json
 import java.math.BigDecimal
 
-@Singleton
 class StockRepositoryImpl @Inject constructor(private val socketManager: SocketManager,
                                               @Dispatchers.IO private val dispatcher: CoroutineDispatcher): StockRepository {
 
@@ -54,7 +53,7 @@ class StockRepositoryImpl @Inject constructor(private val socketManager: SocketM
                     updateStockPrices(stockList)
 
                 } catch (e: Exception) {
-                    Log.e("StockRepository", "Error parsing message: ${e.message}")
+                    Log.e("StockRepository - listenws", "Error parsing message: ${e.message}")
                 }
             }
         }
@@ -86,7 +85,7 @@ class StockRepositoryImpl @Inject constructor(private val socketManager: SocketM
                 socketManager.sendMessage(message){
                     Log.e("StockRepository", "Error sending message: ${it.message}")
                 }
-
+                Log.e("StockRepository Before = ", message ?: "")
                 delay(2000)
             }
         }
