@@ -10,4 +10,6 @@ android {
 dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    api(libs.androidx.foundation)
+    api(libs.androidx.compose.foundation.layout)
 }

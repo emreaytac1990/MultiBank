@@ -38,10 +38,17 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(project(":feature:stock"))
     implementation(project(":core:navigation"))
+    implementation(project(":core:designsystem"))
+    implementation(project(":core:data"))
+    implementation(project(":core:model"))
+
+    implementation(libs.androidx.core.splashscreen)
+    implementation(libs.androidx.foundation)
 }

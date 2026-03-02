@@ -14,8 +14,10 @@ import io.ktor.client.plugins.websocket.WebSockets
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.websocket.pingInterval
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import kotlin.time.Duration.Companion.seconds
 
 
 @Module
@@ -27,7 +29,7 @@ object WebSocketModule {
     fun provideHttpClient(): HttpClient {
         return HttpClient(OkHttp) {
             install(WebSockets){
-                pingInterval = 5_000
+                pingInterval = 5.seconds
             }
 
             install(Logging) {

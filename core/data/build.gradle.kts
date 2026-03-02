@@ -30,7 +30,8 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(project(":core:websocket"))
     implementation(project(":core:di"))
-    implementation(project(":core:domain"))
+    api(project(":core:domain"))
+    api(project(":core:datastore"))
 
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.okhttp)

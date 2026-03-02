@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+import "com/emreaytac/data/dark_theme_config.proto";
+
+option java_package = "com.emreaytac.datastore";
+option java_multiple_files = true;
+
+
+
+message UserPreferences {
+    DarkThemeConfigProto dark_theme_config = 1;
+}
