@@ -1,5 +1,7 @@
 package com.emreaytac.data.di
 
+import com.emreaytac.data.BuildConfig
+import com.emreaytac.di.BaseUrl
 import com.emreaytac.di.Dispatchers
 import dagger.Module
 import dagger.Provides
@@ -21,9 +23,8 @@ object DispatcherModule {
     @Dispatchers.Default
     fun provideDispatcherDefault() = kotlinx.coroutines.Dispatchers.Default
 
-    // TODO: Use it
-    /*@Provides
+    @Provides
     @BaseUrl
-    fun provideBaseUrl() = BuildConfig.BASE_URL*/
+    fun provideBaseUrl() = BuildConfig.BASE_URL
 
 }

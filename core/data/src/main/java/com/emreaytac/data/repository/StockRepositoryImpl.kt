@@ -4,6 +4,7 @@ import android.util.Log
 import com.emreaytac.data.model.StockPriceResponse
 import com.emreaytac.data.model.toDomain
 import com.emreaytac.data.utils.generateMockList
+import com.emreaytac.di.BaseUrl
 import com.emreaytac.di.Dispatchers
 import com.emreaytac.domain.repository.StockRepository
 import com.emreaytac.model.StockPrice
@@ -26,7 +27,8 @@ import kotlinx.serialization.json.Json
 import java.math.BigDecimal
 
 class StockRepositoryImpl @Inject constructor(private val socketManager: SocketManager,
-                                              @Dispatchers.IO private val dispatcher: CoroutineDispatcher): StockRepository {
+                                              @Dispatchers.IO private val dispatcher: CoroutineDispatcher,
+                                                @BaseUrl private val baseUrl: String): StockRepository {
 
     private val _stockPrices = MutableStateFlow<List<StockPrice>>(emptyList())
     override val stockPrices: StateFlow<List<StockPrice>> = _stockPrices.asStateFlow()
@@ -71,8 +73,7 @@ class StockRepositoryImpl @Inject constructor(private val socketManager: SocketM
 
 
     override fun startPriceFeed() {
-        // TODO: Get url from config
-        socketManager.connect("wss://ws.postman-echo.com/raw")
+        socketManager.connect(baseUrl)
 
         priceUpdateJob?.cancel()
         priceUpdateJob = scope.launch {
