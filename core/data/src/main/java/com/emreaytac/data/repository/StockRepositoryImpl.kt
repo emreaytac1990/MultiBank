@@ -84,7 +84,6 @@ class StockRepositoryImpl @Inject constructor(private val socketManager: SocketM
                 socketManager.sendMessage(message){
                     Log.e("StockRepository", "Error sending message: ${it.message}")
                 }
-                Log.e("StockRepository Before = ", message ?: "")
                 delay(2000)
             }
         }

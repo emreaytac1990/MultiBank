@@ -20,6 +20,7 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,6 +30,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.emreaytac.designsystem.component.BottomSheetMenu
 import com.emreaytac.designsystem.component.SettingsButton
@@ -52,6 +56,33 @@ fun FeedScreen(
 
     val settingsUiState by viewModel.settingsUiState.collectAsStateWithLifecycle()
     var showThemeSheet by remember { mutableStateOf(false) }
+
+    val isManuallyStopped by viewModel.isManuallyStopped.collectAsStateWithLifecycle()
+
+    val lifecycleOwner = LocalLifecycleOwner.current
+
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            when (event) {
+                Lifecycle.Event.ON_START -> {
+                    viewModel.connectWs()
+                }
+
+                Lifecycle.Event.ON_STOP -> {
+                    viewModel.disconnectWs()
+                }
+
+                else -> {}
+            }
+        }
+
+        lifecycleOwner.lifecycle.addObserver(observer)
+
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+            viewModel.disconnectWs()
+        }
+    }
 
     Column(
         modifier = modifier.padding(12.dp)
@@ -77,11 +108,11 @@ fun FeedScreen(
 
             TopBox(
                 cornerRadius = 20.dp,
-                mainColor = if (conn.value == SocketStatus.CONNECTED) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.secondary,
-                borderColor = if (conn.value == SocketStatus.CONNECTED) LocalExtendedColors.current.topBoxBorderNegative else LocalExtendedColors.current.topBoxBorderPositive,
-                backgroundColor = if (conn.value == SocketStatus.CONNECTED) LocalExtendedColors.current.topBoxBgNegative else LocalExtendedColors.current.topBoxBgPositive,
+                mainColor = if (!isManuallyStopped) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.secondary,
+                borderColor = if (!isManuallyStopped) LocalExtendedColors.current.topBoxBorderNegative else LocalExtendedColors.current.topBoxBorderPositive,
+                backgroundColor = if (!isManuallyStopped) LocalExtendedColors.current.topBoxBgNegative else LocalExtendedColors.current.topBoxBgPositive,
                 isCircle = false,
-                text = if (conn.value == SocketStatus.CONNECTED) stringResource(id= R.string.feature_stock_stop_feed) else stringResource(id= R.string.feature_stock_start_feed),
+                text = if (!isManuallyStopped) stringResource(id= R.string.feature_stock_stop_feed) else stringResource(id= R.string.feature_stock_start_feed),
                 height = 38.dp
             ){
                 viewModel.togglePriceFeed()

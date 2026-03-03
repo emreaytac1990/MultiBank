@@ -39,7 +39,7 @@ fun StockCardShimmer(
             .fillMaxWidth()
             .clip(RoundedCornerShape(cornerRadius))
             .background( MaterialTheme.colorScheme.surface)
-            .border(1.dp, Color.LightGray.copy(alpha = 0.5f), RoundedCornerShape(cornerRadius))
+            .border(1.dp, LocalExtendedColors.current.cardBorder, RoundedCornerShape(cornerRadius))
             .padding(16.dp)
     ) {
         Column(

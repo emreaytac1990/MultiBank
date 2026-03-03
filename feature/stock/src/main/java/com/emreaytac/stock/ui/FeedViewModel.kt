@@ -10,6 +10,7 @@ import com.emreaytac.model.StockPrice
 import com.emreaytac.websocket.SocketStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -36,49 +37,37 @@ class FeedViewModel @Inject constructor(
                 started = WhileSubscribed(5.seconds.inWholeMilliseconds),
                 initialValue = 0,
             )
-
-    private val _uiState = MutableStateFlow(FeedUiState())
-    val uiState: StateFlow<FeedUiState> = _uiState.asStateFlow()
-
-    private val _connectionStatus = MutableStateFlow(SocketStatus.DISCONNECTED)
-    val connectionStatus: StateFlow<SocketStatus> = _connectionStatus.asStateFlow()
-
-    init {
-        stockRepository.startPriceFeed()
-        observeStockPrices()
-        observeSocketStatus()
-    }
-
-    private fun observeStockPrices() {
-        viewModelScope.launch {
-            stockRepository.stockPrices.collect { prices ->
-                if (prices.isNotEmpty()){
-                    Log.e("FeedViewModel", "prices: ${prices.first().symbol} ")
-                    _uiState.update { it.copy(
-                        stockPrices = prices,
-                        isLoading = false,
-                        isFeedActive = true
-                    )}
-                }
-            }
+    private val _isFeedActive = MutableStateFlow(false)
+    val uiState: StateFlow<FeedUiState> = stockRepository.stockPrices
+        .map { prices ->
+            FeedUiState(
+                stockPrices = prices,
+                isLoading = prices.isEmpty(),
+                isFeedActive = _isFeedActive.value
+            )
         }
-    }
+        .stateIn(
+            scope = viewModelScope,
+            started = WhileSubscribed(5000),
+            initialValue = FeedUiState()
+        )
+    val connectionStatus: StateFlow<SocketStatus> = stockRepository.connectionStatus
+        .stateIn(
+            scope = viewModelScope,
+            started = WhileSubscribed(5000),
+            initialValue = SocketStatus.DISCONNECTED
+        )
 
-    private fun observeSocketStatus() {
-        viewModelScope.launch {
-            stockRepository.connectionStatus.collect { status ->
-                _connectionStatus.update { status }
-            }
-        }
-    }
+    private val _isManuallyStopped = MutableStateFlow(false)
+    val isManuallyStopped: StateFlow<Boolean> = _isManuallyStopped.asStateFlow()
 
     fun togglePriceFeed() {
-        if (_uiState.value.isFeedActive) {
-            stockRepository.stopPriceFeed()
-            _uiState.update { it.copy(isFeedActive = false) }
+        if (_isFeedActive.value) {
+            _isManuallyStopped.value = true
+            disconnectWs()
         } else {
-            stockRepository.startPriceFeed()
-            _uiState.update { it.copy(isFeedActive = true) }
+            _isManuallyStopped.value = false
+            connectWs()
         }
     }
 
@@ -99,14 +88,23 @@ class FeedViewModel @Inject constructor(
         }
     }
 
+    fun connectWs(){
+        if (isManuallyStopped.value) return
+        _isFeedActive.value = true
+        stockRepository.startPriceFeed()
+    }
+
+    fun disconnectWs(){
+        _isFeedActive.value = false
+        stockRepository.stopPriceFeed()
+    }
+
+
     data class FeedUiState(
         val stockPrices: List<StockPrice> = emptyList(),
         val isLoading: Boolean = true,
         val isFeedActive: Boolean = false
     )
-
-
-
 
     override fun onCleared() {
         super.onCleared()

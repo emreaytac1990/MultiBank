@@ -1,5 +1,6 @@
 package com.emreaytac.websocket.internal
 
+import android.util.Log
 import com.emreaytac.websocket.SocketManager
 import com.emreaytac.websocket.SocketStatus
 import io.ktor.client.HttpClient
@@ -49,6 +50,7 @@ internal class SocketManagerImpl @Inject constructor(private val client: HttpCli
                         incoming.consumeAsFlow().collect{ frame ->
                             if (frame is Frame.Text){
                                 _messages.emit(frame.readText())
+                                Log.e("WS emit", frame.readText())
                             }
                         }
                     }
@@ -95,6 +97,7 @@ internal class SocketManagerImpl @Inject constructor(private val client: HttpCli
     ) {
         try {
             scope.launch { session?.send(Frame.Text(message)) }
+            Log.e("WS send", message)
         } catch (e: Exception) {
             onException.invoke(e)
         }
