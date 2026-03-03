@@ -20,6 +20,7 @@ import androidx.compose.ui.platform.LocalContext
 internal val LightDefaultColorScheme = lightColorScheme(
     primary = primaryLight,
     onPrimary = Color.White,
+    primaryFixed = secondaryTextLight,
     background = backgroundLight,
     onBackground = Color.Black,
     surface = surfaceLight,
@@ -37,6 +38,7 @@ internal val LightDefaultColorScheme = lightColorScheme(
 internal val DarkDefaultColorScheme = lightColorScheme(
     primary = primaryDark,
     onPrimary = Color.White,
+    primaryFixed = secondaryTextDark,
     background = backgroundDark,
     onBackground = Color.White,
     surface = surfaceDark,

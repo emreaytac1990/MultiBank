@@ -44,11 +44,11 @@ fun StockCard(
     isPositive: Boolean,
     isSame: Boolean = false,
     cornerRadius: Dp = 12.dp,
-    backgroundColor: Color = Color.White,
+    backgroundColor: Color = MaterialTheme.colorScheme.surface,
     borderColor: Color = LocalExtendedColors.current.cardBorder,
     isConnected: Boolean = true
 ) {
-    val defaultColor = Color.Black
+    val defaultColor = LocalExtendedColors.current.cardMainText
     val highlightColor = if (isPositive) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.error
     val priceColor = remember { Animatable(defaultColor) }
 
@@ -112,7 +112,7 @@ fun StockCard(
             ) {
                 Text(
                     text = stockName,
-                    color = Color.Gray,
+                    color = MaterialTheme.colorScheme.primaryFixed,
                     style = MBTypography.bodySmall
                 )
 

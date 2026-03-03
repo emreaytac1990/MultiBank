@@ -65,7 +65,7 @@ class StockRepositoryImpl @Inject constructor(private val socketManager: SocketM
 
                 item.toDomain(previousPrice)
             }
-            updatedPrices.sortedBy { it.symbol }
+            updatedPrices.sortedByDescending { it.price }
         }
     }
 

@@ -40,16 +40,19 @@ internal val cardBorderLight      = Color(0x0F000000)
 internal val cardBorderDark       = Color(0x12FFFFFF)
 
 internal val topBoxBorderPositiveLight      = Color(0x40059669)
-internal val topBoxBorderPositiveDark       = Color(0x40059669)
+internal val topBoxBorderPositiveDark       = Color(0x3300E5A0)
 
 internal val topBoxBorderNegativeLight      = Color(0xFFF6B9BA)
-internal val topBoxBorderNegativeDark       = Color(0xFFF6B9BA)
+internal val topBoxBorderNegativeDark       = Color(0x59FF4D6D)
 
 internal val topBoxBgPositiveLight      = Color(0xFFE5F2F0)
-internal val topBoxBgPositiveDark       = Color(0xFFE5F2F0)
+internal val topBoxBgPositiveDark       = Color(0x1400E5A0)
 
 internal val topBoxBgNegativeLight      = Color(0xFFF8EBED)
-internal val topBoxBgNegativeDark       = Color(0xFFF8EBED)
+internal val topBoxBgNegativeDark       = Color(0x26FF4D6D)
+
+internal val secondaryTextLight      = Color(0xFF94A3B8)
+internal val secondaryTextDark       = Color(0xFF6B7280)
 
 
 
@@ -57,14 +60,15 @@ internal val topBoxBgNegativeDark       = Color(0xFFF8EBED)
 
 
 data class MBExtendedColors(
-    val gold: Color,
-    val goldGlow: Color,
-    val cardMainText: Color,
-    val cardBorder: Color,
-    val topBoxBorderPositive: Color,
-    val topBoxBorderNegative: Color,
-    val topBoxBgPositive: Color,
-    val topBoxBgNegative: Color
+    val gold: Color = Color.Unspecified,
+    val goldGlow: Color = Color.Unspecified,
+    val cardMainText: Color = Color.Unspecified,
+    val cardBorder: Color = Color.Unspecified,
+    val topBoxBorderPositive: Color = Color.Unspecified,
+    val topBoxBorderNegative: Color = Color.Unspecified,
+    val topBoxBgPositive: Color = Color.Unspecified,
+    val topBoxBgNegative: Color = Color.Unspecified,
+    val secondaryText: Color = Color.Unspecified,
 )
 
 
@@ -77,7 +81,8 @@ val LightExtendedColors = MBExtendedColors(
     topBoxBorderPositive    = topBoxBorderPositiveLight,
     topBoxBorderNegative    = topBoxBorderNegativeLight,
     topBoxBgPositive        = topBoxBgPositiveLight,
-    topBoxBgNegative        = topBoxBgNegativeLight
+    topBoxBgNegative        = topBoxBgNegativeLight,
+    secondaryText           = secondaryTextLight
 )
 
 val DarkExtendedColors = MBExtendedColors(
@@ -88,7 +93,8 @@ val DarkExtendedColors = MBExtendedColors(
     topBoxBorderPositive    = topBoxBorderPositiveDark,
     topBoxBorderNegative    = topBoxBorderNegativeDark,
     topBoxBgPositive        = topBoxBgPositiveDark,
-    topBoxBgNegative        = topBoxBgNegativeDark
+    topBoxBgNegative        = topBoxBgNegativeDark,
+    secondaryText           = secondaryTextDark
 )
 
 val LocalExtendedColors = staticCompositionLocalOf { LightExtendedColors }

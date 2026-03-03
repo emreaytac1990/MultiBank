@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,6 +24,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.emreaytac.designsystem.theme.LocalExtendedColors
 
 
 @Composable
@@ -36,7 +38,7 @@ fun StockCardShimmer(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(cornerRadius))
-            .background(Color.White)
+            .background( MaterialTheme.colorScheme.surface)
             .border(1.dp, Color.LightGray.copy(alpha = 0.5f), RoundedCornerShape(cornerRadius))
             .padding(16.dp)
     ) {
@@ -73,9 +75,9 @@ fun StockCardShimmer(
 fun shimmerBrush(showShimmer: Boolean = true, targetValue: Float = 1000f): Brush {
     return if (showShimmer) {
         val shimmerColors = listOf(
-            Color.LightGray.copy(alpha = 0.6f),
-            Color.LightGray.copy(alpha = 0.2f),
-            Color.LightGray.copy(alpha = 0.6f),
+            LocalExtendedColors.current.secondaryText.copy(alpha = 0.6f),
+            LocalExtendedColors.current.secondaryText.copy(alpha = 0.2f),
+            LocalExtendedColors.current.secondaryText.copy(alpha = 0.6f),
         )
 
         val transition = rememberInfiniteTransition(label = "shimmer")
