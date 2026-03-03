@@ -11,6 +11,7 @@ import com.emreaytac.navigation.StockDetail
 import com.emreaytac.navigation.StockGraph
 import com.emreaytac.navigation.StockList
 import com.emreaytac.stock.ui.FeedScreen
+import com.emreaytac.stock.ui.StockDetailScreen
 
 fun NavGraphBuilder.stockGraph(navController: NavController) {
 
@@ -18,25 +19,22 @@ fun NavGraphBuilder.stockGraph(navController: NavController) {
 
 
         composable<StockList> {
-            /*StockListScreen(onItemClick = { id ->
-                navController.navigate(StockDetail(itemId = id))
-            })*/
-            //Text("List")
-            FeedScreen(onStockClick = {})
+            FeedScreen(onStockClick = { symbol ->
+                navController.navigate(StockDetail(symbol = symbol)) }
+            )
         }
 
 
         composable<StockDetail>(
             deepLinks = listOf(
-                navDeepLink<StockDetail>(basePath = "https://myapp.com/detail")
+                navDeepLink<StockDetail>(basePath = "stocks://symbol")
             )
         ) { backStackEntry ->
             val detail: StockDetail = backStackEntry.toRoute()
-            /*StockDetailScreen(
-                itemId = detail.itemId,
+            StockDetailScreen(
+                symbol = detail.symbol,
                 onBack = { navController.popBackStack() }
-            )*/
-            Text("Detail")
+            )
         }
     }
 }

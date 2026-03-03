@@ -9,5 +9,6 @@
     <string name="feature_stock_dark_theme">Dark Theme</string>
     <string name="feature_stock_light_theme">Light Theme</string>
     <string name="feature_stock_follow_system">System Theme</string>
-
+    <string name="feature_stock_current_price">CURRENT PRICE</string>
+    <string name="feature_stock_about">ABOUT</string>
 </resources>

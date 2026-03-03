@@ -1,6 +1,5 @@
 package com.emreaytac.stock.ui
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.emreaytac.domain.repository.StockRepository
@@ -10,13 +9,11 @@ import com.emreaytac.model.StockPrice
 import com.emreaytac.websocket.SocketStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.seconds
@@ -99,16 +96,10 @@ class FeedViewModel @Inject constructor(
         stockRepository.stopPriceFeed()
     }
 
-
     data class FeedUiState(
         val stockPrices: List<StockPrice> = emptyList(),
         val isLoading: Boolean = true,
         val isFeedActive: Boolean = false
     )
-
-    override fun onCleared() {
-        super.onCleared()
-        stockRepository.stopPriceFeed()
-    }
 }
 
