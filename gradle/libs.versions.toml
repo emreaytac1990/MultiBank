@@ -34,6 +34,10 @@ navigationCompose = "2.9.7"
 protobuf = "4.29.2"
 protobufPlugin = "0.9.6"
 
+mockk = "1.13.10"
+kotlinxCoroutinesTest = "1.7.3"
+turbine = "1.0.0"
+
 compileSdk = "36"
 minSdk = "29"
 foundation = "1.10.3"
@@ -100,6 +104,12 @@ hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.r
 hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hilt" }
 hilt-ext-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltExt" }
 hilt-ext-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hiltExt" }
+
+#Test
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+ktor-client-mock = { group = "io.ktor", name = "ktor-client-mock", version.ref = "ktor" }
 
 
 # Dependencies of the included build-logic
